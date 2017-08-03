@@ -5,6 +5,16 @@ require('../model/category_db.php');
 require('../model/product.php');
 require('../model/product_db.php');
 
+require('../model/fields.php');
+require('../model/validate.php');
+
+//Set up fields
+$validate = new Validate();
+$fields = $validate->getFields();
+$fields->addField('code');
+$fields->addField('name');
+$fields->addField('price', 'Must be a valid number.');
+
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
